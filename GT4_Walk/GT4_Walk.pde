@@ -17,6 +17,8 @@ float x7, y7;
 int mouseXValue = windowWidth/2;
 int mouseYValue = windowHeight/2;
 
+int walk_speed = 6;
+
 float angle1 = 0.0;
 float angle2 = 0.0;
 float angle3 = 0.0;
@@ -60,31 +62,6 @@ float angle7B = 3.5 * aU - init7;
 float angle8B = aU - init8;
 float infB = 0.0; //Influence of figure B
 
-float angle1C = aU - init1;
-float angle2C = aU - init2;
-float angle3C = -aU/2 - init3;
-float angle4C = 4 * aU - init4;
-float angle5C = 5 * aU - init5;
-float angle6C = -aU - init6;
-float angle7C = 13 * aU/2 - init7;
-float angle8C = -4 * aU - init8;
-float infC = 0.0; //Influence of figure C
-
-float angle1D = -aU/2 - init1;
-float angle2D = -3 * aU - init2;
-float angle3D = 2 * aU - init3;
-float angle4D = 2 * aU - init4;
-float angle5D = 6 * aU - init5;
-float angle6D = 3 * aU - init6;
-float angle7D = 4 * aU - init7;
-float angle8D = -2 * aU - init8;
-float infD = 0.0;
-
-PImage img_bg;
-PImage img_up;
-PImage img_buttom;
-PImage img_right;
-PImage img_left;
 PImage img_street;
 
 float mouseXpc;
@@ -93,34 +70,16 @@ void setup(){
   size(windowWidth, windowHeight);
   
   img_street = loadImage("street.png");
-//  img_bg = loadImage("gt4_bg.jpg");
-//  img_up = loadImage("up.jpg");
-//  img_buttom = loadImage("buttom.jpg");
-//  img_left = loadImage("left.jpg");
-//  img_right = loadImage("right.jpg");
 }
 
 void mousePosInfluence(){
     mouseXValue = mouseX*2 - width/2;
     mouseYValue = mouseY*2 - width/2;
     
-    mouseXpc = 6*float(mouseX)/1000;
+    mouseXpc = walk_speed*float(mouseX)/1000;
     infA = (sin(2*PI*mouseXpc)/2)+0.5;
     infB = (cos(2*PI*mouseXpc)/2)+0.5;
-        println(infA + " A:B " + infB);
-
-    if (mouseXValue < (windowWidth/2)){
-//      infA = (width/2 - mouseXValue) / float(windowWidth/2); // in %
-    }
-    if (mouseXValue > (windowWidth/2)){
-//      infB = (mouseXValue - width/2) / float(windowWidth/2); 
-    }
-    if (mouseYValue > (windowHeight/2)){
- //     infC = (mouseYValue - height/2) / float(windowHeight/2); 
-    }
-    if (mouseYValue < (windowHeight/2)){
-   //   infD = (height/2 - mouseYValue) / float(windowHeight/2);
-    }
+    println(int(infA*100) + " A:B " + int(infB*100));
 }
 
 void mouseMoved(){
@@ -130,7 +89,7 @@ void mouseMoved(){
 void mouseDragged(){
  // if (mouseX > (bodyPosX - bodyWidth/2 -50) && mouseX < (bodyPosX + bodyWidth/2+50) && mouseY > (bodyPosY - bodyHeight/2) && mouseY < (bodyPosY + bodyHeight/2)){
     bodyPosX = mouseX;
-    bodyPosY = int(3*sin(2*2*PI*mouseXpc)+height/3);
+    bodyPosY = int(6*cos(2*2*PI*mouseXpc)+height/3);
     mousePosInfluence();
   //}
 }
@@ -149,12 +108,6 @@ void draw(){
   imageMode(CORNER);
   image(img_street, 0, height-300, width, height);
    
- // image(img_bg, width/2, height/2, 300, 300);
-//  image(img_up, width/2, height/8, 150, 150);
-//  image(img_buttom, width/2, 7*height/8+20, 150, 150);
-//  image(img_right, 7*width/8, height/2, 150, 150);
-//  image(img_left, width/8-20, height/2, 150, 150);
-
   strokeWeight(10); //line thikness
     fill(210, 126, 49); //filling color
 
@@ -208,41 +161,17 @@ void draw(){
 
   
   //Update angles
-  angle1 = updateAngle(infA, angle1A, infB, angle1B, infC, angle1C, infD, angle1D) + init1;
-  //if (angle1 > 4*aU) {angle1 = 4*aU;}
-  //if (angle1 < -3*aU) {angle1 = -3*aU;}
-  angle2 = updateAngle(infA, angle2A, infB, angle2B, infC, angle2C, infD, angle2D) + init2;
-  //if (angle2 > 5*aU) {angle2 = 5*aU;}
-  //if (angle2 < -5*aU) {angle2 = -5*aU;}
-  angle3 = updateAngle(infA, angle3A, infB, angle3B, infC, angle3C, infD, angle3D) + init3;
-  //if (angle3 > 5*aU) {angle3 = 5*aU;}
-  //if (angle3 < -4*aU) {angle3 = -4*aU;}
-  angle4 = updateAngle(infA, angle4A, infB, angle4B, infC, angle4C, infD, angle4D) + init4;
-  //if (angle4 > 5*aU) {angle4 = 5*aU;}
-  //if (angle4 < -5*aU) {angle4 = -5*aU;}
-  angle5 = updateAngle(infA, angle5A, infB, angle5B, infC, angle5C, infD, angle5D) + init5;
-  //if (angle5 > 9*aU) {angle5 = 9*aU;}
-  //if (angle5 < 2*aU) {angle5 = 2*aU;}
-  angle6 = updateAngle(infA, angle6A, infB, angle6B, infC, angle6C, infD, angle6D) + init6;
-  //if (angle6 > 5*aU) {angle6 = 5*aU;}
-  //if (angle6 < -5*aU) {angle6 = -5*aU;}
-  angle7 = updateAngle(infA, angle7A, infB, angle7B, infC, angle7C, infD, angle7D) + init7;
-  //if (angle7 > 10*aU) {angle7 = 10*aU;}
-  //if (angle7 < 1*aU) {angle7 = 1*aU;}
-  angle8 = updateAngle(infA, angle8A, infB, angle8B, infC, angle8C, infD, angle8D) + init8;
-  //if (angle8 > 5*aU) {angle8 = 5*aU;}
-  //if (angle8 < -5*aU) {angle8 = -5*aU;} 
+  angle1 = updateAngle(infA, angle1A, infB, angle1B) + init1;
+  angle2 = updateAngle(infA, angle2A, infB, angle2B) + init2;
+  angle3 = updateAngle(infA, angle3A, infB, angle3B) + init3;
+  angle4 = updateAngle(infA, angle4A, infB, angle4B) + init4;
+  angle5 = updateAngle(infA, angle5A, infB, angle5B) + init5;
+  angle6 = updateAngle(infA, angle6A, infB, angle6B) + init6;
+  angle7 = updateAngle(infA, angle7A, infB, angle7B) + init7;
+  angle8 = updateAngle(infA, angle8A, infB, angle8B) + init8;
 }
 
-float jX(float x, float angle){
-  return x + segLength * cos(angle);
-}
-
-float jY(float y, float angle){
-return y + segLength * sin(angle);
-}
-
-float updateAngle(float infA, float angleA, float infB, float angleB, float infC, float angleC, float infD, float angleD){
+float updateAngle(float infA, float angleA, float infB, float angleB){
   return infA * angleA + infB * angleB;
 }
 
