@@ -130,7 +130,7 @@ void mouseMoved(){
 void mouseDragged(){
  // if (mouseX > (bodyPosX - bodyWidth/2 -50) && mouseX < (bodyPosX + bodyWidth/2+50) && mouseY > (bodyPosY - bodyHeight/2) && mouseY < (bodyPosY + bodyHeight/2)){
     bodyPosX = mouseX;
-    bodyPosY = int(5*sin(2*2*PI*mouseXpc)+height/3);
+    bodyPosY = int(3*sin(2*2*PI*mouseXpc)+height/3);
     mousePosInfluence();
   //}
 }
