@@ -159,7 +159,6 @@ void draw(){
     ellipse(0, 0, jointR, jointR);
   popMatrix();
 
-  
   //Update angles
   angle1 = updateAngle(infA, angle1A, infB, angle1B) + init1;
   angle2 = updateAngle(infA, angle2A, infB, angle2B) + init2;

@@ -1,3 +1,7 @@
+/////////////////////////////////////////////////////
+/// By Houssein Ben Amor, WS14/15, HTW Berlin, GT4///
+//////////////////// Creative Commons ///////////////
+
 int windowWidth = 500;
 int windowHeight = 500;
 int height = windowHeight;
@@ -122,7 +126,7 @@ void setup(){
 
 void mouseMoved(){
   mousePosInfluence();
-    updateMove();
+  updateMove();
 }
 
 void mouseDragged(){
@@ -194,12 +198,14 @@ void segment(float x, float y, float a){
 }
 
 void updateMove(){
+  // update angles
   for (int i = 1; i <= numOfAng; i++){
     angle[i] = updateAngle(angleA[0], angleA[i], angleB[0], angleB[i], angleC[0], angleC[i], angleD[0], angleD[i]) + init[i];
     if (angle[i] > angleMax[i]) {angle[i] = angleMax[i];}
     if (angle[i] < angleMin[i]) {angle[i] = angleMin[i];}
   }
   
+  // update joints (Knoten)
   x[1] = x[3] = bodyPosX + bodyWidth/2;
   y[1] = y[5] = bodyPosY - bodyHeight/2;
   y[3] = y[7] = bodyPosY + bodyHeight/2;
