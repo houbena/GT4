@@ -149,15 +149,19 @@ void draw(){
   stroke(segCol); // line color
   fill(fillCol); //filling color
   
-  //draw body
-  rectMode(CENTER);
-  rect(bodyPosX, bodyPosY, bodyWidth, bodyHeight);
-  ellipse(bodyPosX, bodyPosY - 70, 35,45); //Head shape
+  body();
   
   drawLegOrArm(x[1], y[1], angle[1], angle[2]);  //right arm
   drawLegOrArm(x[3], y[3], angle[3], angle[4]);  //right leg
   drawLegOrArm(x[5], y[5], angle[5], angle[6]);  //left arm
   drawLegOrArm(x[7], y[7], angle[7], angle[8]);  //left leg
+}
+
+void body(){
+  //draw body and head
+  rectMode(CENTER);
+  rect(bodyPosX, bodyPosY, bodyWidth, bodyHeight);
+  ellipse(bodyPosX, bodyPosY - 70, 35,45); //Head shape
 }
 
 void mousePosInfluence(){
@@ -205,7 +209,10 @@ void updateMove(){
     if (angle[i] < angleMin[i]) {angle[i] = angleMin[i];}
   }
   
-  // update joints (Knoten)
+  updateJoints();     // update joints (Knoten)
+}
+
+void updateJoints(){
   x[1] = x[3] = bodyPosX + bodyWidth/2;
   y[1] = y[5] = bodyPosY - bodyHeight/2;
   y[3] = y[7] = bodyPosY + bodyHeight/2;
